@@ -1,0 +1,89 @@
+---
+title: "ggrob_OriginalHomeworkCode_02"
+author: "Gianna Grob"
+date: "9/16/2019"
+output: html_document
+---
+
+***
+
+# Introduction 
+
+***
+
+This is the code for [Homework 2](https://fuzzyatelin.github.io/bioanth-stats/homework-02.html), on week three of AN597. This homework is associated with [Module 6](https://fuzzyatelin.github.io/bioanth-stats/module-06/module-06.html), [Module 7](https://fuzzyatelin.github.io/bioanth-stats/module-07/module-07.html), and [Module 8](https://fuzzyatelin.github.io/bioanth-stats/module-08/module-08.html#probability_mass_functions).
+
+The information for the question is as follows:
+
+>Every Saturday morning, at the same time, a primatologist goes and sits in the forest to listen for titi monkey calls, counting the number of calls they hear in a 2 hour window from 5am to 7am. Based on previous knowledge, she believes that the mean number of calls she will hear in that time is exactly 15. Let X represent the appropriate Poisson random variable of the number of calls heard in each monitoring session.
+
+## Question 1
+
+What is the probability that she will hear more than 8 calls during any given session? 
+
+```{r}
+ppois(8, lambda = 15, lower=FALSE) #Find the upper tail for more than 8 calls in a session
+```
+
+Hearing 8 or more calls is very likely with a probability of 96.26%.
+
+## Question 2
+
+What is the probability that she will hear no calls in a session?
+
+```{r}
+dpois(0, lambda = 15) #Test for 0 calls in a session
+```
+
+The chance of hearing 0 calls is very low with an occurance of 3.06e-07.
+
+## Question 3
+
+What is the probability that she will hear exactly 3 calls in a session?
+
+```{r}
+dpois(3, lambda = 15) #Find chance of hearing exactly 3 calls.
+```
+
+The probability she will hear exactly 3 calls will be 0.00017.
+
+## Question 4
+
+Plot the relevant Poisson mass function over the values in range 0 ≤ x ≤ 30.
+
+```{r}
+x <- 0:30 #Set our range of 0 to 30
+l <- 15 #Set our lambda value as the amount of calls heard which is 15.
+barplot(ppois(q=x,lambda=l),ylim=0:1,space=0, names.arg=x,xlab="x",ylab="Pr(X ≤ x)",main="Cumulative Probability") #Create barplot with the two varibles for cumulative probability
+```
+
+Note: Is that the graph he wants????
+
+## Question 5
+
+Simulate 104 results from this distribution (i.e., 2 years of Saturday monitoring sessions).
+
+```{r}
+rpois(104,15) #Set-up a simulation for 104 results for our lambda value of 15
+```
+
+Results will be different every time since it is a simulation, but the above code will simulate 104 results with different amount of calls heard.
+
+## Question 6
+
+Plot the simulated results using hist() and use xlim() to set the horizontal limits to be from 0 to 30. How does your histogram compare to the shape of the probability mass function you plotted above?
+
+```{r}
+x <- rpois(104,15) #Create a vector that is our simulation from above 
+hist(x, xlim = c(0,30), main = "Histogram of 104 Simulations", xlab = "Number of Calls", ylab = "Probability", probability = TRUE) #Create histogram with simulation with range from 0 to 30.
+```
+
+Note: In my histogram I set probability to TRUE to allow for probabiltiy to be shown. I have seen this in examples online. Is that needed for this graph? 
+
+### Challenges Faced
+
+1) Learning how to do probability problems.
+2) Creating a graph for Question 4, not sure if I made the correct one. Just used one off the modules.
+3) Creating the histogram. Is the probabilty addition necessary? With and without gives a graph, but they look different. 
+
+#### Summary from Majo: Overall our code looks similar, for question 4 I have the same inquiry if my graph is correct. It seems to me that the graph asked is for  the probability mass function (Because it is mentioned in question 6)
